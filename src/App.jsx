@@ -1,0 +1,9 @@
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { Shell } from './components/Layout'
+import { ProtectedRoute, AdminRoute } from './components/ProtectedRoute'
+import AuthForm from './components/AuthForm'
+import { About, ArticlePage, Categories, Explore, Home } from './pages/Public'
+import { Bookmarks, CreateArticle, Dashboard, EditArticle, MyArticles, Profile, SettingsPage } from './pages/Dashboard'
+import { AdminArticles, AdminCategories, AdminComments, AdminDashboard, AdminUsers } from './pages/Admin'
+
+export default function App(){return <Shell><Routes><Route path="/" element={<Home/>}/><Route path="/explore" element={<Explore/>}/><Route path="/article/:slug" element={<ArticlePage/>}/><Route path="/categories" element={<Categories/>}/><Route path="/about" element={<About/>}/><Route path="/login" element={<AuthForm mode="login"/>}/><Route path="/register" element={<AuthForm mode="register"/>}/><Route path="/forgot-password" element={<AuthForm mode="forgot"/>}/><Route element={<ProtectedRoute/>}><Route path="/dashboard" element={<Dashboard/>}/><Route path="/dashboard/articles" element={<MyArticles/>}/><Route path="/dashboard/drafts" element={<MyArticles draftsOnly/>}/><Route path="/dashboard/create" element={<CreateArticle/>}/><Route path="/dashboard/edit/:id" element={<EditArticle/>}/><Route path="/dashboard/bookmarks" element={<Bookmarks/>}/><Route path="/dashboard/profile" element={<Profile/>}/><Route path="/dashboard/settings" element={<SettingsPage/>}/><Route element={<AdminRoute/>}><Route path="/admin" element={<AdminDashboard/>}/><Route path="/admin/articles" element={<AdminArticles/>}/><Route path="/admin/users" element={<AdminUsers/>}/><Route path="/admin/categories" element={<AdminCategories/>}/><Route path="/admin/comments" element={<AdminComments/>}/></Route></Route><Route path="*" element={<Navigate to="/" replace/>}/></Routes></Shell>}
